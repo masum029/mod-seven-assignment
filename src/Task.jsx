@@ -1,5 +1,6 @@
 import React,{useState} from "react";
 
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function TodoS(){
@@ -58,4 +59,68 @@ function Task(){
 }
 
 
-export default TodoS;
+
+
+function TodoList() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
+
+  const handleInputChange = (event) => {
+    setNewTask(event.target.value);
+  };
+
+  const handleAddTask = (event) => {
+    event.preventDefault();
+    if (newTask.trim() !== '') {
+      setTasks([...tasks, newTask]);
+      setNewTask('');
+    }
+  };
+
+  const handleRemoveTask = (index) => {
+    const updatedTasks = [...tasks];
+    updatedTasks.splice(index, 1);
+    setTasks(updatedTasks);
+  };
+
+  return (
+    <div className="container">
+      <h1 className="mt-4">To-Do List</h1>
+
+      <form className="mb-4" onSubmit={handleAddTask}>
+        <div className="input-group">
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Enter a new task"
+            value={newTask}
+            onChange={handleInputChange}
+          />
+          <button type="submit" className="btn btn-primary">
+            Add Task
+          </button>
+        </div>
+      </form>
+
+      <ul className="list-group">
+        {tasks.map((task, index) => (
+          <li className="list-group-item d-flex justify-content-between" key={index}>
+            {task}
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={() => handleRemoveTask(index)}
+            >
+              Delete
+            </button>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default TodoList;
+
+
+//export default TodoS;

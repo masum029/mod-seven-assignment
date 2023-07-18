@@ -1,15 +1,12 @@
 
 import './App.css';
-import TodoS from './Task';
-
-import TodoList2 from './TodoList';
+import TodoList from './Task';
 
 function App() {
   return (
     <div className="App">
-        {/* <TodoList/> */}
-        {/* <TodoList2/> */}
-        <TodoS/>
+        <TodoList/>
+      
     </div>
   );
 }
